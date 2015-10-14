@@ -131,7 +131,7 @@ def sortface(pointidx, face):
     '''Sort the points in a face so that duplicates can be eliminated.'''
     face = tuple(sorted(face))
     p1, p2, p3 = [pointidx[p] for p in face]
-    if (p2 - p1).cross(p3 - p2) > 0:
+    if (p2 - p1).cross(p3 - p2) < 0:
         face = (face[0], face[2], face[1])
     return face
 
