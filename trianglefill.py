@@ -23,7 +23,7 @@ bl_info = {
     "name": "Triangle fill",
     "author": "Petteri Aimonen",
     "version": (1, 0),
-    "blender": (2, 76, 0),
+    "blender": (3, 0, 0),
     "location": "",
     "description": "Fills the selected face with evenly sized triangles",
     "warning": "",
@@ -143,7 +143,7 @@ class TriangleFill(bpy.types.Operator):
     bl_label = "Triangle Fill"
     bl_options = {'REGISTER', 'UNDO'}
 
-    edge_length = bpy.props.FloatProperty(
+    edge_length: bpy.props.FloatProperty(
         name = "Edge length",
         default = 100.0,
         min = 0.1,
@@ -153,7 +153,7 @@ class TriangleFill(bpy.types.Operator):
         description='Adjust target edge length as percentage of current average edge length.'
     )
     
-    only_edges = bpy.props.BoolProperty(
+    only_edges: bpy.props.BoolProperty(
         name = "Add only edges",
         default = False
     )
@@ -326,7 +326,7 @@ class TriangleFill(bpy.types.Operator):
         
         if regular_faces or border_faces:
             # Remove the original selected face
-            bmesh.ops.delete(bm, geom=[bm.faces.active], context=3)
+            bmesh.ops.delete(bm, geom=[bm.faces.active], context="FACES_ONLY")
         
         if self.only_edges:
             # For debugging: show the edges instead of faces
