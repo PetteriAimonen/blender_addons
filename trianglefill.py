@@ -141,6 +141,7 @@ def sortedge(edge):
 class TriangleFill(bpy.types.Operator):
     bl_idname = "mesh.triangle_fill"
     bl_label = "Triangle Fill"
+    bl_description = "Fill the selected face with small regular triangles (currenly works only on 1 active face)"
     bl_options = {'REGISTER', 'UNDO'}
 
     edge_length: bpy.props.FloatProperty(
@@ -157,6 +158,10 @@ class TriangleFill(bpy.types.Operator):
         name = "Add only edges",
         default = False
     )
+
+    @classmethod
+    def poll(cls, context):
+        return context.mode == "EDIT_MESH"
 
     def execute(self, context):
         start = time.time()
@@ -345,11 +350,18 @@ class TriangleFill(bpy.types.Operator):
         start = time.time()
         return {'FINISHED'}
 
+def face_menu_ui(self, context):
+    layout = self.layout
+    layout.separator()
+    layout.operator("mesh.triangle_fill")
+
 def register():
     bpy.utils.register_class(TriangleFill)
+    bpy.types.VIEW3D_MT_edit_mesh_faces.append(face_menu_ui)
 
 def unregister():
     bpy.utils.unregister_class(TriangleFill)
+    bpy.types.VIEW3D_MT_edit_mesh_faces.remove(face_menu_ui)
 
 if __name__ == "__main__":
     register()

@@ -15,7 +15,7 @@ Think of it as a grid fill for irregular faces, or as a remesh for only selected
 2. Select your mesh, tab into edit mode and select "face select mode" from toolbar at bottom.
 Select one face of the mesh.
 
-3. Press spacebar and type "triangle fill".
+3. Press spacebar and type "Triangle Fill" or choose "Triangle Fill" from Blender "Face" operators menu at the top of the viewport.
 
 4. You can adjust the size of the triangles in the sidebar.
 
